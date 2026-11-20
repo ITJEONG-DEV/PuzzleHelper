@@ -75,6 +75,16 @@ export function AppIcon({ id }: { id: GameId }) {
           <path d="M45 57l7 12H38z" fill="#e0662f" />
         </>
       )}
+      {id === 'killer' && (
+        <>
+          <path d="M36 18v54M54 18v54M18 36h54M18 54h54" stroke="#1c2233" strokeWidth="2.5" />
+          <path d="M21 21h30v12H39v18H21z" fill="none" stroke="#2f5bd3" strokeWidth="1.8" strokeDasharray="3 2" />
+          <text x="23" y="30" fontSize="8" fontWeight="700" fill="#1c2233">
+            17
+          </text>
+          <rect x="54" y="54" width="18" height="18" fill="#ffd666" />
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );

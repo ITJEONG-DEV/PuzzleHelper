@@ -27,7 +27,7 @@ export default defineConfig({
       manifest: {
         name: '퍼즐 도우미',
         short_name: '퍼즐 도우미',
-        description: '스도쿠·노노그램·가쿠로·지뢰찾기·스타 배틀·칼큐도쿠·텐트와 나무를 한 단계씩 힌트를 받으며 푸는 앱',
+        description: '여러 논리 퍼즐을 한 단계씩 힌트를 받으며 푸는 앱',
         lang: 'ko',
         start_url: '.',
         scope: '.',

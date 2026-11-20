@@ -110,7 +110,94 @@ export function cageHolds(c: Cage, digits: number[]): boolean {
  * 칸마다 가능한 숫자와, 묶음마다 모든 배치에 들어 있는 숫자를 돌려준다. 배치가 없으면 null.
  */
 export function cageOptions(g: Grid, k: number, cand: number[]): { allowed: number[]; mustInLine: Map<number, number> } | null {
+  // 같은 상자·같은 후보는 몇 번이고 다시 나오므로 결과를 기억해 둔다
+  let cache = optionCache.get(g);
+  if (!cache) {
+    cache = new Map();
+    optionCache.set(g, cache);
+  }
   const cage = g.cages[k];
+  const key = `${k}:${cage.cells.map((i) => cand[i]).join(',')}`;
+  const hit = cache.get(key);
+  if (hit !== undefined) return hit;
+  const res = cage.op === '+' && g.cageAllDistinct ? sumDistinctOptions(g, cage, cand) : enumerateOptions(g, cage, cand);
+  if (cache.size > 200000) cache.clear();
+  cache.set(key, res);
+  return res;
+}
+
+type Options = { allowed: number[]; mustInLine: Map<number, number> } | null;
+const optionCache = new WeakMap<Grid, Map<string, Options>>();
+
+/** COMBOS[칸 수][합] = 서로 다른 1~9 숫자로 그 합을 만드는 조합들(비트마스크) */
+const COMBOS: number[][][] = (() => {
+  const t: number[][][] = Array.from({ length: 10 }, () => Array.from({ length: 46 }, () => [] as number[]));
+  for (let m = 0; m < 512; m++) {
+    const mask = m << 1;
+    const ds = digitsOf(mask);
+    t[ds.length][ds.reduce((a, b) => a + b, 0)].push(mask);
+  }
+  return t;
+})();
+
+/**
+ * 합 상자이고 상자 안 숫자가 모두 다를 때(킬러 스도쿠): 합 조합마다 칸에 숫자를 하나씩 맞춰 보는 방식.
+ * 묶음에 꼭 들어가는 숫자는 '모든 조합에 들어 있고, 그 묶음 밖 상자 칸에는 올 수 없는 숫자'로 구한다.
+ */
+function sumDistinctOptions(g: Grid, cage: Cage, cand: number[]): Options {
+  const cells = cage.cells;
+  const len = cells.length;
+  if (len > 9 || cage.target > 45) return null;
+  const cm = cells.map((i) => cand[i]);
+  let union = 0;
+  for (const m of cm) union |= m;
+  const allowed = cells.map(() => 0);
+  let mustAll = ~0;
+  let any = false;
+  const full = fullMask(g.n);
+  for (const combo of COMBOS[len][cage.target] ?? []) {
+    if ((combo & full) !== combo || (combo & union) !== combo) continue;
+    const cc = cm.map((m) => m & combo);
+    if (cc.some((m) => !m)) continue;
+    // 앞에서부터 / 뒤에서부터 쓸 수 있는 숫자 묶음
+    const fwd: Set<number>[] = [new Set([0])];
+    for (let t = 0; t < len; t++) {
+      const next = new Set<number>();
+      for (const used of fwd[t]) for (let rest = cc[t] & ~used; rest; rest &= rest - 1) next.add(used | (rest & -rest));
+      fwd.push(next);
+    }
+    if (!fwd[len].has(combo)) continue;
+    const bwd: Set<number>[] = new Array(len + 1);
+    bwd[len] = new Set([0]);
+    for (let t = len - 1; t >= 0; t--) {
+      const next = new Set<number>();
+      for (const used of bwd[t + 1]) for (let rest = cc[t] & ~used; rest; rest &= rest - 1) next.add(used | (rest & -rest));
+      bwd[t] = next;
+    }
+    any = true;
+    mustAll &= combo;
+    for (let t = 0; t < len; t++) {
+      for (const used of fwd[t]) {
+        for (let rest = cc[t] & ~used & ~allowed[t]; rest; rest &= rest - 1) {
+          const b = rest & -rest;
+          if (bwd[t + 1].has(combo ^ used ^ b)) allowed[t] |= b;
+        }
+      }
+    }
+  }
+  if (!any) return null;
+  const must = new Map<number, number>();
+  for (const l of new Set(cells.flatMap((i) => g.unitsOf[i]))) {
+    let outside = 0;
+    cells.forEach((i, t) => {
+      if (!g.unitsOf[i].includes(l)) outside |= allowed[t];
+    });
+    must.set(l, mustAll & ~outside);
+  }
+  return { allowed, mustInLine: must };
+}
+
+function enumerateOptions(g: Grid, cage: Cage, cand: number[]): Options {
   const cells = cage.cells;
   const allowed = cells.map(() => 0);
   const lineIds = [...new Set(cells.flatMap((i) => g.unitsOf[i]))];
@@ -303,11 +390,11 @@ export function nextDeduction(g: Grid, values: number[], cand: number[], maxTier
   return findProbe(g, values, cand);
 }
 
-/** 1·2단계로 끝까지 좁힌다. 모순이면 false */
+/** 넣어 보기용: 1단계 기법으로 끝까지 좁힌다. 모순이면 false (2단계까지 쓰면 큰 판에서 너무 느리다) */
 function propagate(g: Grid, values: number[], cand: number[]): boolean {
   for (let step = 0; step < 600; step++) {
     if (contradiction(g, values, cand)) return false;
-    const d = nextDeduction(g, values, cand, 2);
+    const d = nextDeduction(g, values, cand, 1);
     if (!d) return true;
     applyTo(g, values, cand, d);
   }

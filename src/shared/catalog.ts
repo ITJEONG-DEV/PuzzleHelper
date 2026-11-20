@@ -7,6 +7,7 @@ export const GAMES = [
   { id: 'starbattle', label: '스타 배틀', desc: '행·열·영역마다 별 하나, 별끼리 닿지 않게' },
   { id: 'calcudoku', label: '칼큐도쿠', desc: '켄켄과 같은 규칙. 상자마다 사칙연산 결과에 맞게 숫자 채우기' },
   { id: 'tents', label: '텐트와 나무', desc: '나무마다 텐트 하나, 텐트끼리 닿지 않게, 줄마다 텐트 수 맞추기' },
+  { id: 'killer', label: '킬러 스도쿠', desc: '스도쿠 + 점선 상자마다 숫자 합 맞추기' },
 ] as const;
 
 export type GameId = (typeof GAMES)[number]['id'];
