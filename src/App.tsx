@@ -13,6 +13,7 @@ const SCREENS: Record<GameId, ComponentType> = {
   calcudoku: lazy(() => import('./games/calcudoku/App')),
   tents: lazy(() => import('./games/tents/App')),
   killer: lazy(() => import('./games/killer/App')),
+  futoshiki: lazy(() => import('./games/futoshiki/App')),
 };
 
 const TITLE = '퍼즐 도우미';

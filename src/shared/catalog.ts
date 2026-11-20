@@ -8,6 +8,7 @@ export const GAMES = [
   { id: 'calcudoku', label: '칼큐도쿠', desc: '켄켄과 같은 규칙. 상자마다 사칙연산 결과에 맞게 숫자 채우기' },
   { id: 'tents', label: '텐트와 나무', desc: '나무마다 텐트 하나, 텐트끼리 닿지 않게, 줄마다 텐트 수 맞추기' },
   { id: 'killer', label: '킬러 스도쿠', desc: '스도쿠 + 점선 상자마다 숫자 합 맞추기' },
+  { id: 'futoshiki', label: '후토시키', desc: '행·열마다 숫자 한 번씩, 칸 사이 부등호 지키기' },
 ] as const;
 
 export type GameId = (typeof GAMES)[number]['id'];

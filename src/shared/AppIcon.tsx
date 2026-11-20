@@ -85,6 +85,23 @@ export function AppIcon({ id }: { id: GameId }) {
           <rect x="54" y="54" width="18" height="18" fill="#ffd666" />
         </>
       )}
+      {id === 'futoshiki' && (
+        <>
+          <rect x="22" y="22" width="18" height="18" rx="3" fill="none" stroke="#1c2233" strokeWidth="2" />
+          <rect x="50" y="22" width="18" height="18" rx="3" fill="none" stroke="#1c2233" strokeWidth="2" />
+          <rect x="22" y="50" width="18" height="18" rx="3" fill="none" stroke="#1c2233" strokeWidth="2" />
+          <rect x="50" y="50" width="18" height="18" rx="3" fill="none" stroke="#1c2233" strokeWidth="2" />
+          <text x="45" y="35" textAnchor="middle" fontSize="11" fontWeight="800" fill="#2f5bd3">
+            &lt;
+          </text>
+          <text x="31" y="49" textAnchor="middle" fontSize="10" fontWeight="800" fill="#2f5bd3">
+            ∨
+          </text>
+          <text x="31" y="35" textAnchor="middle" fontSize="11" fontWeight="700" fill="#1c2233">
+            2
+          </text>
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );
