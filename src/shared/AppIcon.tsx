@@ -48,6 +48,21 @@ export function AppIcon({ id }: { id: GameId }) {
           </text>
         </>
       )}
+      {id === 'calcudoku' && (
+        <>
+          <path d="M36 18v54M54 18v54M18 36h54M18 54h54" stroke="#c9cfdc" strokeWidth="1.5" />
+          <path d="M18 36h36V18M54 36v36M36 36v36M18 54h18" stroke="#1c2233" strokeWidth="3" fill="none" />
+          <text x="21" y="30" fontSize="10" fontWeight="700" fill="#1c2233">
+            6+
+          </text>
+          <text x="57" y="30" fontSize="10" fontWeight="700" fill="#1c2233">
+            2÷
+          </text>
+          <text x="45" y="50" textAnchor="middle" fontSize="14" fontWeight="700" fill="#2f5bd3">
+            3
+          </text>
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );
