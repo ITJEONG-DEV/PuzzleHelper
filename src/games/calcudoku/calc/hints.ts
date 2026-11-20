@@ -150,6 +150,17 @@ function fromDeduction(lay: Layout, values: number[], cand: number[], d: Deducti
       };
     }
   }
+  // 이 게임에 없는 기법(주어진 숫자 등)은 칸과 결과만 알려 준다
+  const cell = d.place?.cell ?? d.eliminate[0]?.cell ?? 0;
+  return {
+    kind: d.kind as HintKind,
+    name: '정해지는 칸',
+    steps: [`${eul(cellName(n, cell))} 보세요.`, '이 칸에서 정해지는 것이 있어요.', d.place ? `${eun(cellName(n, cell))} ${yeyo(d.place.digit)}` : `${elimText(d.eliminate)}.`],
+    focus: [cell],
+    keyCells: [cell],
+    place: d.place,
+    eliminate: d.eliminate,
+  };
 }
 
 /** 다음 한 단계를 찾는다. 다 풀었으면 null */
