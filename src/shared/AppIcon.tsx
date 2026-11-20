@@ -63,6 +63,18 @@ export function AppIcon({ id }: { id: GameId }) {
           </text>
         </>
       )}
+      {id === 'tents' && (
+        <>
+          <path d="M18 18h54v54H18z" fill="#e3f3d6" />
+          <path d="M36 18v54M54 18v54M18 36h54M18 54h54" stroke="#9fb48f" strokeWidth="1.5" />
+          <circle cx="27" cy="25" r="6" fill="#2f8a3c" />
+          <path d="M26 30h2v5h-2z" fill="#7a4a1f" />
+          <path d="M45 39l7 12H38z" fill="#e0662f" />
+          <circle cx="63" cy="61" r="6" fill="#2f8a3c" />
+          <path d="M62 66h2v5h-2z" fill="#7a4a1f" />
+          <path d="M45 57l7 12H38z" fill="#e0662f" />
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );

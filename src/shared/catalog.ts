@@ -6,6 +6,7 @@ export const GAMES = [
   { id: 'minesweeper', label: '지뢰찾기', desc: '찍지 않고 논리로 끝까지 풀리는 지뢰찾기' },
   { id: 'starbattle', label: '스타 배틀', desc: '행·열·영역마다 별 하나, 별끼리 닿지 않게' },
   { id: 'calcudoku', label: '칼큐도쿠', desc: '켄켄과 같은 규칙. 상자마다 사칙연산 결과에 맞게 숫자 채우기' },
+  { id: 'tents', label: '텐트와 나무', desc: '나무마다 텐트 하나, 텐트끼리 닿지 않게, 줄마다 텐트 수 맞추기' },
 ] as const;
 
 export type GameId = (typeof GAMES)[number]['id'];
