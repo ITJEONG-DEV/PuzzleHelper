@@ -9,6 +9,7 @@ export const GAMES = [
   { id: 'tents', label: '텐트와 나무', desc: '나무마다 텐트 하나, 텐트끼리 닿지 않게, 줄마다 텐트 수 맞추기' },
   { id: 'killer', label: '킬러 스도쿠', desc: '스도쿠 + 점선 상자마다 숫자 합 맞추기' },
   { id: 'futoshiki', label: '후토시키', desc: '행·열마다 숫자 한 번씩, 칸 사이 부등호 지키기' },
+  { id: 'skyscrapers', label: '스카이스크래퍼', desc: '행·열마다 빌딩 하나씩, 바깥 숫자는 보이는 빌딩 수' },
 ] as const;
 
 export type GameId = (typeof GAMES)[number]['id'];

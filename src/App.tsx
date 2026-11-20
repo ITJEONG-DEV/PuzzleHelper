@@ -14,6 +14,7 @@ const SCREENS: Record<GameId, ComponentType> = {
   tents: lazy(() => import('./games/tents/App')),
   killer: lazy(() => import('./games/killer/App')),
   futoshiki: lazy(() => import('./games/futoshiki/App')),
+  skyscrapers: lazy(() => import('./games/skyscrapers/App')),
 };
 
 const TITLE = '퍼즐 도우미';

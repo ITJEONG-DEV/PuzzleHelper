@@ -102,6 +102,15 @@ export function AppIcon({ id }: { id: GameId }) {
           </text>
         </>
       )}
+      {id === 'skyscrapers' && (
+        <>
+          <path d="M24 72V52h9v20zM36 72V36h9v36zM48 72V44h9v28zM60 72V26h8v46z" fill="#2f5bd3" />
+          <path d="M38 40h5M38 46h5M38 52h5M62 30h4M62 36h4M62 42h4" stroke="#fff" strokeWidth="2" />
+          <text x="26" y="34" fontSize="11" fontWeight="800" fill="#1c2233">
+            3
+          </text>
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );
