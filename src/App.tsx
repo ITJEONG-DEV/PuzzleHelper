@@ -9,6 +9,7 @@ const SCREENS: Record<GameId, ComponentType> = {
   nonogram: lazy(() => import('./games/nonogram/App')),
   kakuro: lazy(() => import('./games/kakuro/App')),
   minesweeper: lazy(() => import('./games/minesweeper/App')),
+  starbattle: lazy(() => import('./games/starbattle/App')),
 };
 
 const TITLE = '퍼즐 도우미';

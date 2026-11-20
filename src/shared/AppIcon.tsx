@@ -36,6 +36,18 @@ export function AppIcon({ id }: { id: GameId }) {
           <path d="M36 18v54M54 18v54M18 36h54M18 54h54" stroke="#1c2233" strokeWidth="1.5" />
         </>
       )}
+      {id === 'starbattle' && (
+        <>
+          <path d="M18 18h36v18H18z" fill="#dcefff" />
+          <path d="M54 18h18v36H54z" fill="#fde2e2" />
+          <path d="M18 36h36v36H18z" fill="#e3f6dd" />
+          <path d="M54 54h18v18H54z" fill="#fff1c7" />
+          <path d="M18 36h36M54 18v54M54 54h18" stroke="#1c2233" strokeWidth="2.5" fill="none" />
+          <text x="36" y="62" textAnchor="middle" fontSize="22" fill="#c98a00">
+            ★
+          </text>
+        </>
+      )}
       <rect x="18" y="18" width="54" height="54" fill="none" stroke="#1c2233" strokeWidth="3" />
     </svg>
   );
