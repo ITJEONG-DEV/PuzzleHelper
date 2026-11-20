@@ -1,0 +1,369 @@
+/* 모든 화면 공용 스타일: 색 변수, 기본, 머리, 메시지, 새 버전 안내, 앱 모음, 판 위 안내 */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #1c2233;
+  --muted: #667089;
+  --line: #c9cfdc;
+  --line-strong: #1c2233;
+  --accent: #2f5bd3;
+  --accent-soft: #dfe7fb;
+  --peer: #eef1f8;
+  --same: #c9d7fa;
+  --given: #1c2233;
+  --entered: #2f5bd3;
+  --focus: #fff1c2;
+  --key: #ffd666;
+  --place: #c8f0d2;
+  --danger: #d23b3b;
+  --danger-soft: #fde2e2;
+  --success: #1f8a4c;
+  --success-soft: #dcf5e5;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151d;
+    --surface: #1b1f2a;
+    --text: #e6e9f2;
+    --muted: #98a1b8;
+    --line: #394057;
+    --line-strong: #c2c9db;
+    --accent: #7c9cff;
+    --accent-soft: #263257;
+    --peer: #222839;
+    --same: #2f3f6e;
+    --given: #e6e9f2;
+    --entered: #8fadff;
+    --focus: #3b3520;
+    --key: #6b5717;
+    --place: #1d4a2e;
+    --danger: #ff7a7a;
+    --danger-soft: #4a2323;
+    --success: #6fdc9b;
+    --success-soft: #1d3a2a;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.phase-badge {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: var(--accent-soft);
+}
+
+.message.error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.message.success {
+  background: var(--success-soft);
+  color: var(--success);
+  font-weight: 600;
+}
+
+
+/* ---------- 새 버전 안내 ---------- */
+
+.update-banner {
+  position: fixed;
+  left: 50%;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(488px, calc(100% - 32px));
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+  font-size: 0.92rem;
+}
+
+.update-banner span {
+  flex: 1;
+  min-width: 0;
+}
+
+.update-banner button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 7px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.update-banner button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+
+/* ---------- 앱 모음 ---------- */
+
+.app-header h1 {
+  flex: 1;
+}
+
+.app-header {
+  gap: 8px;
+}
+
+.app-launch {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.app-launch svg {
+  width: 18px;
+  height: 18px;
+}
+
+.app-launch:hover {
+  color: var(--accent);
+}
+
+.app-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgb(0 0 0 / 0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.app-sheet {
+  width: min(520px, 100%);
+  background: var(--surface);
+  border-radius: 16px 16px 0 0;
+  padding: 14px 16px calc(20px + env(safe-area-inset-bottom));
+  box-shadow: 0 -6px 24px rgb(0 0 0 / 0.2);
+  animation: app-sheet-up 0.18s ease-out;
+}
+
+@keyframes app-sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-sheet {
+    animation: none;
+  }
+}
+
+.app-sheet header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.app-sheet-close {
+  border: 0;
+  background: none;
+  font-size: 1.1rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.app-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px 8px;
+}
+
+.app-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+a.app-tile:hover,
+a.app-tile:focus-visible {
+  background: var(--peer);
+}
+
+.app-tile.current {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.app-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.app-here {
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-top: -4px;
+}
+
+
+/* ---------- 다 풀었을 때 안내 (판 위에 겹침) ---------- */
+
+.board-wrap {
+  position: relative;
+}
+
+.solved-toast {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  max-width: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 10px 16px;
+  border-radius: 999px;
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid var(--success);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  animation: solved-pop 0.2s ease-out;
+}
+
+.solved-toast span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.solved-toast button {
+  flex: none;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 0.95rem;
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .solved-toast {
+    animation: none;
+  }
+}
+
+.solved-toast.error {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* 새 버전 안내 버튼: 손가락으로 누르기 쉬운 크기 */
+.update-banner button {
+  min-height: 40px;
+  touch-action: manipulation;
+}
+
+.update-banner button:disabled {
+  opacity: 0.6;
+}
+
+@keyframes solved-pop {
+  from {
+    transform: translate(-50%, -8px);
+    opacity: 0;
+  }
+}
+

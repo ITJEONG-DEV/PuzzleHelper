@@ -1,0 +1,67 @@
+/* ---------- 홈 화면 (게임 목록) ---------- */
+
+.home-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.home-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.home-tile:hover,
+.home-tile:focus-visible {
+  border-color: var(--accent);
+}
+
+.home-tile .app-icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+}
+
+.home-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.home-text strong {
+  font-size: 1.05rem;
+}
+
+.home-text span {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.loading {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 0;
+}
+
+/* 앱 모음 시트의 목록 링크 */
+.app-sheet-home {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.app-sheet-home::after {
+  content: ' ›';
+  color: var(--muted);
+}
